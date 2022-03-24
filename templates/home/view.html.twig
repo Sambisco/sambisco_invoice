@@ -1,0 +1,21 @@
+ 
+ <table width="100%" border="1">
+    <tr>
+    <th>Id</th>
+    <th>fullname</th>
+    <th>Phone</th>
+    <th>Date</th>
+    <th>Number invoice</th>
+    <th>Total</th>
+    </tr>
+    <tr>
+    {% for sho in show %}
+    <td>{{ sho.id }}</td>
+    <td>{{ sho.fullname }}</td>
+    <td>{{ sho.phone }}</td>
+    <td>{{ sho.date|date('d/m/Y') }}</td>
+    <td>00{{ sho.number }}</td>
+    <td>{{ sho.total }}</td>
+    </tr>
+     {% endfor %}
+      </table>

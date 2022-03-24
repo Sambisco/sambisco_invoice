@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 1000px; width: 95%; font: 15px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <form action="" method="post">
+          <label>Date :</label>{{ form_widget(formInv.date) }} 
+   <label>Number :</label>{% for val in vals %}
+        {% if val.number == null %}
+    {{ form_widget(formInv.number, {'attr': {'value': '1'}}) }}  
+       {% else %}
+        {{ form_widget(formInv.number, {'attr': {'value': val.number}}) }}
+      {% endif %}
+    {% endfor %}
+    <hr>
+    <div>CUSTOMER</div>
+    {{ form_widget(formCust.fullname,{'attr': {'placeholder': 'Full name'}}) }}  
+    {{ form_widget(formCust.phone,{'attr': {'placeholder': 'Phone number'}}) }}  
+    {{ form_widget(formCust.address,{'attr': {'placeholder': 'Address'}}) }} 
+    <hr>
+    <div>DETAILS</div>
+    {{ form_widget(formDet.Description,{'attr': {'placeholder': 'Description'}}) }}
+    {{ form_widget(formDet.Quantity,{'attr': {'placeholder': 'Quantity'}}) }}
+    {{ form_widget(formDet.Amount,{'attr': {'placeholder': 'Amount'}}) }}
+    {{ form_widget(formDet.vat,{'attr': {'placeholder': 'VAT'}}) }}
+    {{ form_widget(formDet.total,{'attr': {'placeholder': 'Total','value': tot }}) }}
+    <input type="submit" value = "+=" name ="btn" />
+    <input type="submit" value = "Add" name ="btn" />
+     <hr>
+     <div>LIST</div>
+   <table border="1" width="100%">
+    <tr>
+     <th>#</th>
+    <th>Description</th>
+    <th>Quantity</th>
+    <th>Amount</th>
+    <th>VAT</th>
+    <th>TOTAL</th>
+    <th>Action</th>
+    </tr>
+     {% for t in dcomm %}
+    <tr>
+    <td>{{ t.line }}</td>
+    <td>{{ t.Description }}</td>
+    <td>{{ t.Quantity }}</td>
+    <td>{{ t.Amount }}</td>
+    <td>{{ t.vat }}</td>
+    <td>{{ t.total }}</td>
+    <td><a href="{{ path('app_delete', {'id': t.line }) }}"> Delete</a></td>
+    </tr>
+      {% endfor %}
+   
+   </table>
+  
+   <hr>
+   <input type="submit" value="validate" name="btn"/>
+   </form>
+    
+</div>
+{% endblock %}

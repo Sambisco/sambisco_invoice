@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 1000px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <button><a href="{{ path('app_add') }}" class="btn btn-dark" > Create new invoice</a></button>
+    <hr>
+    {% for success_message in app.session.flashbag.get('message') %}
+    {{ success_message }}
+    {% endfor %}
+    <table width="100%" border="1">
+    <tr>
+    <th>Id</th>
+    <th>fullname</th>
+    <th>Phone</th>
+    <th>Date</th>
+    <th>Number invoice</th>
+    <th>Total</th>
+    <th>Action</th>
+    </tr>
+    {% for req in reqs %}
+    <tr>
+    <td>{{ req.id }}</td>
+    <td>{{ req.fullname }}</td>
+    <td>{{ req.phone }}</td>
+    <td>{{ req.date|date('d/m/Y') }}</td>
+    <td>00{{ req.number }}</td>
+    <td>{{ req.total }}</td>
+    <td>
+    <a href="{{ path('app_view', {'number': req.number }) }}"> View</a>
+    <a href="{{ path('app_delete', {'id': req.id }) }}"> delete</a>
+    </td>
+    </tr>
+     {% endfor %}
+    </table>
+</div>
+{% endblock %}
